@@ -1,15 +1,13 @@
-import Unique from '../Classes/Unique';
+import Expandable from '../Classes/Expandable';
 import Buyable from '../Interfaces/Buyable';
 
-export default class Book extends Unique implements Buyable {
+export default class YPhone extends Expandable implements Buyable {
   constructor(
     readonly id: number,
     readonly name: string,
-    readonly author: string,
     readonly price: number,
-    readonly pages: number
+    readonly description: string
   ) {
     super();
   }
 }
-

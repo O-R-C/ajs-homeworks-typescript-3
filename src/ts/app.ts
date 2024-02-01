@@ -1,6 +1,7 @@
 import Book from './domain/Book';
 import Cart from './service/Cart';
 import Movie from './domain/Movie';
+import YPhone from './domain/YPhone';
 import MusicAlbum from './domain/MusicAlbum';
 
 const cart = new Cart();
@@ -21,9 +22,12 @@ cart.add(
   )
 );
 
-console.log(cart.items);
-console.log(cart.totalCost());
-console.log(cart.totalCostWithSale(50));
+cart.add(new YPhone(10, 'YPhone', 1000, 'bla bla bla'));
+cart.add(new YPhone(10, 'YPhone', 1000, 'bla bla bla'));
+cart.add(new YPhone(10, 'YPhone', 1000, 'bla bla bla'));
+
+cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
 
 cart.removeItem(1111);
 

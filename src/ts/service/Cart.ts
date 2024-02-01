@@ -4,11 +4,20 @@ export default class Cart {
   private _items: Buyable[] = [];
 
   /**
-   * добавляет элемент в корзину
+   * добавляет элемент в корзину,
+   * или увеличивает кол-во у неуникальных элементов
    * @param item добавляемый элемент
    */
   add(item: Buyable): void {
-    this._items.push(item);
+    const foundItem = [...this._items].find((elem) => elem.id === item.id);
+
+    if (foundItem && foundItem.canBeAdded) {
+      foundItem.count += 1;
+    }
+
+    if (!foundItem) {
+      this._items.push(item);
+    }
   }
 
   /**
@@ -23,7 +32,10 @@ export default class Cart {
    * @returns {Number} стоимость всех элементов в корзине
    */
   totalCost(): number {
-    return this._items.reduce((acc, item) => acc + item.price, 0);
+    return [...this._items].reduce(
+      (acc, item) => acc + item.price * item.count,
+      0
+    );
   }
 
   /**
@@ -40,7 +52,7 @@ export default class Cart {
    * @param id айдишник элемента
    */
   removeItem(id: number): void {
-    this._items = this._items.filter((item) => item.id !== id);
+    this._items = [...this._items].filter((item) => item.id !== id);
   }
 }
 
